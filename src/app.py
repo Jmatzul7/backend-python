@@ -5,10 +5,10 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
-from routes.customer_routes import customer_bp
-from routes.services_routes import services_bp
-from routes.sales_routes import sales_bp
-from routes.user_routes import users_bp
+from customer_routes import customer_bp
+from services_routes import services_bp
+from sales_routes import sales_bp
+from user_routes import users_bp
 
 
 app.config['JWT_SECRET_KEY'] = 'clave_prueba'
