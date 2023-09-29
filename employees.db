@@ -1,0 +1,52 @@
+/*DATABASES FOR MYSQL*/
+
+CREATE DATABASE employees
+
+CREATE TABLE Employee (
+    employee_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(20),
+    password VARCHAR(100),
+    full_name VARCHAR(25),
+    role VARCHAR(25)
+);
+
+CREATE TABLE Customers (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(25),
+    last_name VARCHAR(25),
+    age INT,
+    gender VARCHAR(25),
+    contact_number VARCHAR(20),
+    email VARCHAR(25),
+    address VARCHAR(25),
+    services_purchased INT DEFAULT 0
+);
+
+CREATE TABLE Services (
+    service_id INT AUTO_INCREMENT PRIMARY KEY,
+    service_name VARCHAR(25),
+    service_type VARCHAR(25),
+    price DECIMAL(10, 2),
+    availability INT,
+    sales_count INT DEFAULT 0
+);
+
+CREATE TABLE Sales (
+    sale_id INT AUTO_INCREMENT PRIMARY KEY,
+    employee_id INT,
+    customer_id INT,
+    service_id INT,
+    sale_date DATETIME,
+    additional_info TEXT,
+    FOREIGN KEY (employee_id) REFERENCES Employee(employee_id),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (service_id) REFERENCES Services(service_id)
+);
+
+CREATE TABLE CustomerServices (
+    customer_id INT,
+    service_id INT,
+    sale_id INT,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (service_id) REFERENCES Services(service_id)
+);
