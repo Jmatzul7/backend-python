@@ -9,9 +9,6 @@ import os
 import mysql.connector
 from dotenv import load_dotenv
 
-
-
-
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
@@ -86,9 +83,10 @@ def login():
 
         # Configurar opciones de la cookie
         cookie_options = {
-            'httponly': True,
+            'httponly': False,
             'expires': expire,
-            'secure': True,  
+            'secure': False, 
+            'samesite': None, 
         }
 
         # Devolver la respuesta con el token de acceso y la cookie
