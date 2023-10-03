@@ -440,6 +440,13 @@ def get_customers():
 @jwt_required()
 def get_top_customers():
     try:
+
+        # Obtén el token JWT de la cabecera de la solicitud
+        token = request.headers.get('Authorization')
+
+        # Imprime el token en la consola
+        print("Token recibido:", token)
+
         conexion = get_db_connection()
         customers = conexion.cursor()
         # Obtén los 5 clientes que han adquirido más servicios
@@ -674,6 +681,12 @@ def create_service():
 @jwt_required()
 def get_all_services():
     try:
+        # Obtén el token JWT de la cabecera de la solicitud
+        token = request.headers.get('Authorization')
+
+        # Imprime el token en la consola
+        print("Token recibido:", token)
+
         conexion = get_db_connection()
         services = conexion.cursor()
 
@@ -1100,6 +1113,12 @@ def delete_sale(sale_id):
 @jwt_required()
 def get_latest_sales():
     try:
+        # Obtén el token JWT de la cabecera de la solicitud
+        token = request.headers.get('Authorization')
+
+        # Imprime el token en la consola
+        print("Token recibido:", token)
+        
         with get_db_connection() as conexion:
             sales = conexion.cursor()
 
