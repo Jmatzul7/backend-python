@@ -105,6 +105,12 @@ def login():
 @app.route('/protected', methods=['GET'])
 @jwt_required()
 def protected_route():
+    # Obtén el token JWT de la cabecera de la solicitud
+    token = request.headers.get('Authorization')
+
+        # Imprime el token en la consola
+    print("Token recibido:", token)
+    
     current_user = get_jwt_identity()
     return jsonify({'message': 'Ruta protegida', 'user': current_user}), 200
 
@@ -408,7 +414,7 @@ def get_customers():
 
         # Imprime el token en la consola
         print("Token recibido:", token)
-        
+
         conexion = get_db_connection()
         cursor = conexion.cursor()
 
