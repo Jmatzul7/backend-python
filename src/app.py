@@ -402,6 +402,13 @@ def get_customer(customer_id):
 @jwt_required()
 def get_customers():
     try:
+
+        # Obtén el token JWT de la cabecera de la solicitud
+        token = request.headers.get('Authorization')
+
+        # Imprime el token en la consola
+        print("Token recibido:", token)
+        
         conexion = get_db_connection()
         cursor = conexion.cursor()
 
@@ -1118,7 +1125,7 @@ def get_latest_sales():
 
         # Imprime el token en la consola
         print("Token recibido:", token)
-        
+
         with get_db_connection() as conexion:
             sales = conexion.cursor()
 
