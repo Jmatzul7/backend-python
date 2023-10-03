@@ -85,7 +85,7 @@ def login():
         cookie_options = {
             'httponly': True,
             'expires': expire,
-            'secure': True, 
+            'secure': False, 
             'samesite': None, 
         }
 
@@ -118,6 +118,7 @@ def protected_route():
         return jsonify({'message': 'Ruta protegida', 'user': current_user}), 200
     except:
         return jsonify({'error': 'Token JWT inválido'}), 401
+
 
 @app.route('/newUser', methods=['POST'])
 @jwt_required()
