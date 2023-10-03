@@ -83,9 +83,9 @@ def login():
 
         # Configurar opciones de la cookie
         cookie_options = {
-            'httponly': False,
+            'httponly': True,
             'expires': expire,
-            'secure': False, 
+            'secure': True, 
             'samesite': None, 
         }
 
@@ -1107,7 +1107,7 @@ def get_latest_sales():
             sales.execute("""
                 SELECT Sales.sale_id, Employee.username, Customers.first_name, Customers.last_name, Services.service_name, Services.service_type
                 FROM Sales
-                INNER JOIN employee ON Sales.employee_id = Employee.employee_id
+                INNER JOIN Employee ON Sales.employee_id = Employee.employee_id
                 INNER JOIN Customers ON Sales.customer_id = Customers.customer_id
                 INNER JOIN Services ON Sales.service_id = Services.service_id
                 ORDER BY Sales.sale_date DESC
