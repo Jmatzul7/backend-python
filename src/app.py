@@ -105,14 +105,19 @@ def login():
 @app.route('/protected', methods=['GET'])
 @jwt_required()
 def protected_route():
-    # Obtén el token JWT de la cabecera de la solicitud
-    token = request.headers.get('Authorization')
+    try:
+        # Obtén el token JWT de la cabecera de la solicitud
+        token = request.headers.get('Authorization')
 
-        # Imprime el token en la consola
-    print("Token recibido:", token)
-    
-    current_user = get_jwt_identity()
-    return jsonify({'message': 'Ruta protegida', 'user': current_user}), 200
+            # Imprime el token en la consola
+        print("Token recibido:", token)
+        # Esto solo se ejecutará si el usuario proporciona un token JWT válido en la cabecera
+        current_user = get_jwt_identity()
+        
+        # current_user contendrá la identidad del usuario autenticado
+        return jsonify({'message': 'Ruta protegida', 'user': current_user}), 200
+    except:
+        return jsonify({'error': 'Token JWT inválido'}), 401
 
 @app.route('/newUser', methods=['POST'])
 @jwt_required()
