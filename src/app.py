@@ -39,10 +39,12 @@ def get_db_connection():
 
 
 app.config['JWT_SECRET_KEY'] = 'clave_prueba'
-app.config['JWT_TOKEN_LOCATION'] = ['cookies']
+app.config['JWT_TOKEN_LOCATION'] = ['headers','cookies']
 app.config['JWT_COOKIE_CSRF_PROTECT'] = False
-#app.config['SESSION_COOKIE_SECURE'] = True
-#app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['JWT_ACCESS_COOKIE_NAME'] = 'access_token_cookie'
+app.config['SESSION_COOKIE_SECURE'] = False
+app.config['JWT_COOKIE_SAMESITE'] = None
+app.config['SESSION_COOKIE_HTTPONLY'] = False
 app.config['WTF_CSRF_ENABLED'] = False
 app.config['WTF_CSRF_SECRET_KEY'] = 'clave_secreta_csrf'
 
@@ -87,7 +89,10 @@ def login():
             'expires': expire,
             'secure': False, 
             'samesite': None, 
+            'path': '/',
+            'domain': None,
         }
+
 
         # Devolver la respuesta con el token de acceso y la cookie
         response_data = {'access_token': access_token}
